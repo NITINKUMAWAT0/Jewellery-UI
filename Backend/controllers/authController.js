@@ -5,7 +5,7 @@ const db = require('../config/db');
 // Register a new user
 exports.register = async (req, res) => {
   const { username, email, password } = req.body;
-  console.log( username, email, password )
+  
   try {
     // Check if the user exists
     const [existingUser] = await db.query('SELECT * FROM Authentications WHERE email = ?', [email]);
@@ -22,8 +22,14 @@ exports.register = async (req, res) => {
       email,
       hashedPassword,
     ]);
+    const [user] = await db.query('SELECT * FROM Authentications WHERE email = ?', [email]);
+    if (!user.length) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
-    return res.status(201).json({ message: 'User registered successfully' });
+    // Generate JWT token
+    const token = jwt.sign({ id: user[0].id }, process.env.JWT_SECRET);
+    return res.status(201).json({ message: 'User registered successfully' , token});
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const RegisterForm = ({ onLogin }) => {
   const [username , setUsername] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate(); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/auth/register', { username , email, password });
       onLogin(response.data.token);
+      navigate('/home')
     } catch (err) {
       setError('Invalid credentials'+err);
       console.log(err)
