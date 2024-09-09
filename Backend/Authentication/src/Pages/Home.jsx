@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { removeToken, getToken } from '../utils/auth'; // getToken to retrieve token
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import AdminTable from '../components/AdminTable';
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track authentication
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home Page</h1>
+      <AdminTable/>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

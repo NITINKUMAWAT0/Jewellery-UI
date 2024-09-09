@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 import { setToken, removeToken } from './utils/auth';
 import RegisterForm from './components/RegisterForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const App = () => {
 
