@@ -1,0 +1,55 @@
+.admin-table {
+    width: 100%; /* Full width */
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .admin-table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .admin-table thead th {
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+    padding: 0.75rem;
+  }
+  
+  .admin-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .admin-table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .admin-table .action-btn {
+    border-radius: 50%;
+  }
+  
+  .role-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .role-name {
+    color: #343a40;
+  }
+  
+  .role-switch {
+    margin-left: 1rem;
+  }
+  
+  .dropdown-menu {
+    min-width: 200px; /* Adjust as needed */
+  }
+  
+  .dropdown-item {
+    padding: 0.5rem;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+  
