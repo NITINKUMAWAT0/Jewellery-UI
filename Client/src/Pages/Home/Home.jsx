@@ -3,9 +3,11 @@ import './Home.scss'
 import Carousel from '../../Components/Carousel /Carousel'
 const Home = () => {
   return (
-    <>
-    <Carousel/>
-    </>
+    <div className='home'>
+     
+      <Carousel />
+      
+    </div>
   )
 }
 
