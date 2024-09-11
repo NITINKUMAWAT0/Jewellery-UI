@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
+const User = require('../Models/User');
 
 // Register a new user
 exports.register = async (req, res) => {
@@ -76,7 +77,8 @@ exports.verify_jwt_token = async (req, res) => {
     if(!verified){
       return res.status(201).json({ valid: false , message: 'Invalid Token' });
     }
-    return res.status(200).json({ valid: true, user: verified });
+    const verifiedID = await User.FindAdminById(verified.id)
+    return res.status(200).json({ valid: true, user: verified , AdminMember:verifiedID});
   } catch (err) {
     console.error('Token verification error:', err);
     return res.status(401).json({ valid: false, message: 'Invalid or expired token' });

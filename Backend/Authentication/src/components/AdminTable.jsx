@@ -4,16 +4,18 @@ import { FaEllipsisV } from 'react-icons/fa';
 import './AdminTable.css';
 import axios from 'axios';
 
-const AdminTable = () => {
+const AdminTable = ({ontoken}) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(null);
+  const [roles , setroles] = useState([])
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/home/adminMember');
+      const response = await axios.get(`http://localhost:5000/api/home/adminMember/${ontoken}`);
       const usersData = response.data.result;
       setUsers(usersData);
+      setroles(response.data.job_roles)
     } catch (error) {
       setError('Error fetching data');
       console.error('Error fetching data:', error);
@@ -26,7 +28,7 @@ const AdminTable = () => {
     fetchData();
   }, [fetchData]);
 
-  const handleRoleChange = useCallback((userId, role) => async (e) => {
+  const handleRoleChange = useCallback((userId, prevRole, role) => async (e) => {
     const isChecked = e.target.checked;
 
     
@@ -35,6 +37,7 @@ const AdminTable = () => {
       await axios.post('http://localhost:5000/api/home/updateJobRole', {
         userId: userId,
         role: role,
+        prevRole:prevRole,
         isChecked: isChecked
       });
 
@@ -59,10 +62,11 @@ const AdminTable = () => {
     }
   }, []);
 
-  const roles = ['productManager', 'adminManager', 'customerManager', 'orderManager', 'customReportsManager'];
+  // const roles = ['adminManager','productManager','customerManager', 'orderManager', 'customReportsManager'];
 
   return (
     <div className="admin-table-container">
+      
       {loading && <Spinner animation="border" />}
       {error && <p className="error-message">{error}</p>}
       <Table striped bordered hover className="admin-table">
@@ -71,6 +75,7 @@ const AdminTable = () => {
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Job_role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -80,6 +85,7 @@ const AdminTable = () => {
               <td>{user.id}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
+              <td>{user.job_role}</td>
               <td>
                 <Dropdown>
                   <Dropdown.Toggle variant="light" id={`dropdown-basic-${user.id}`} className="action-btn">
@@ -98,7 +104,7 @@ const AdminTable = () => {
                             className="float-end role-switch"
                             checked={user.job_role === role} // Check if the user's job_role matches the current role
                             disabled={loading} // Disable while loading
-                            onChange={handleRoleChange(user.id, role)}
+                            onChange={handleRoleChange(user.id, user.job_role, role)}
                           />
                         </div>
                       </Dropdown.Item>
