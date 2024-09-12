@@ -103,7 +103,7 @@ const Banners = () => {
 
       <div className="signup-mail">
         <h1>
-          Get <span>12% off</span> on your first order
+          Get <span> 12% off</span> on your first order
         </h1>
         <div className="input">
           <input type="text" placeholder="Enter Email Address*" />
