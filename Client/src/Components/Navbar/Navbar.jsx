@@ -1,10 +1,8 @@
-import React from 'react';
 import './Navbar.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Logo from '../../assets/Logo.png';
-import Betterzo_logo from '../../assets/Betterzo.webp';
 const Navbar = () => {
   return (
     <div className="nav">
