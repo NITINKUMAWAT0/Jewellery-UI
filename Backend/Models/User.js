@@ -1,17 +1,23 @@
 const db = require('../config/db');
-
+const jwt = require('jsonwebtoken')
 const User = {
-  FindAdminMembers: async () => {
-    const query = 'SELECT * FROM authentications';
+  FindAdminMembers: async (id) => {
+    const query = `
+      SELECT * 
+      FROM authentications 
+      WHERE id != ? 
+      AND job_role != (SELECT job_role FROM authentications WHERE id = ?)`;
+
     try {
       // Using async/await for promise-based query
-      const [result] = await db.query(query);
+      const [result] = await db.query(query, [id, id]);
       return result;
     } catch (err) {
       console.error('Error occurred while fetching admin members:', err);
       throw new Error('Error fetching admin members'); // This will be caught in the controller
     }
   },
+
 
   FindAdminById: async (id) =>{
     const query = 'SELECT * FROM AUTHENTICATIONS WHERE id = ?';
@@ -35,6 +41,18 @@ const User = {
     console.error('Error occurred while fetching admin members:', error);
     throw new Error('Error chnaging the Admin Role!')
    }
+  },  
+  VerifyAdminMembers: async (token)=>{
+    try {
+      const verified = jwt.verify(token, process.env.JWT_SECRET);
+      if(!verified){
+        return res.status(201).json({ valid: false , message: 'Invalid Token' });
+      }
+      return verified.id
+    } catch (err) {
+      console.error('Token verification error:', err);
+      return new Error('Error veryfying the admin member!')
+    }
   }
 };
 

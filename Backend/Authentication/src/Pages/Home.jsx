@@ -6,7 +6,8 @@ import AdminTable from '../components/AdminTable';
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track authentication
   const navigate = useNavigate();
-
+  const [tokenSession , setTokenSession] = useState('')
+  const [AdminMemberData , setAdminMemberData] = useState('')
   useEffect(() => {
     const token = getToken(); // Retrieve token from local storage
     if (!token) {
@@ -18,6 +19,8 @@ const Home = () => {
         .then((response) => {
           if (response.data.valid) {
             setIsAuthenticated(true); // If token is valid, set authentication to true
+            setTokenSession(token)
+            setAdminMemberData(response.data.AdminMember)
           } else {
             removeToken(); // If token is invalid, remove it and navigate to login
             navigate('/login');
@@ -44,7 +47,9 @@ const Home = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <AdminTable/>
+      <h2>Username: {AdminMemberData.username}</h2>
+      <h4>Job: {AdminMemberData.job_role}</h4>
+      <AdminTable ontoken={tokenSession}/>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
