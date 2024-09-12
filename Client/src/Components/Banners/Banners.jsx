@@ -61,6 +61,31 @@ const Banners = () => {
         </div>
       </div>
 
+      <h1>~ Curated by Our Master Jewelers ~</h1>
+      <div className="collections">
+        <div className="collection-section">
+          <img
+            src="https://assets.angara.com/assets/homepage-Assets/us/collections/celestial-collection.jpg?width=768&quality=95"
+            alt=""
+          />
+          <p>Celestial Collections</p>
+        </div>
+        <div className="collection-section">
+          <img
+            src="https://assets.angara.com/assets/homepage-Assets/us/collections/sweet-treat.jpg?width=768&quality=95"
+            alt=""
+          />
+          <p>Sweet Treats Collection</p>
+        </div>
+        <div className="collection-section">
+          <img
+            src="https://assets.angara.com/assets/homepage-Assets/us/collections/aeon-collection.jpg?width=768&quality=95"
+            alt=""
+          />
+          <p>Aeon Colletion</p>
+        </div>
+      </div>
+
       <div className="lower-banner">
         <img src={b1} alt="" />
 
