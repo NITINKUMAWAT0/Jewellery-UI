@@ -38,7 +38,7 @@ const  Carousel = () => {
       <div className="content">
         <h1 data-content="Shop Now">Shop Now</h1>
         <div className="author">
-          <h2>Jwells</h2>
+          <h2>BETTERZO</h2>
           <p>Be expressive</p>
           <p>make memories with your special ones</p>
         </div>

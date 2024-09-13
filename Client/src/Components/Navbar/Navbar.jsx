@@ -2,7 +2,7 @@ import "./Navbar.scss";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/Logo.jpg";
 
 const Navbar = () => {
   return (
@@ -10,13 +10,13 @@ const Navbar = () => {
       {/* Upper Navigation */}
       <div className="upper-nav">
         <img src={Logo} alt="Logo" className="logo" />
-        
+
         <input
           className="search-input"
           type="text"
           placeholder="Search for Diamond Jewellery, Gold..."
         />
-        
+
         <div className="nav-icons">
           <PersonOutlineOutlinedIcon className="profile" />
           <FavoriteBorderOutlinedIcon className="heart" />
@@ -87,7 +87,6 @@ const Navbar = () => {
             <p>Wedding Rings</p>
             <p>Wedding Gifts</p>
           </div>
-
         </div>
 
         {/* Gifts Dropdown */}
